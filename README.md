@@ -1,1 +1,2 @@
-# virtual-keyboard
+# Virtual Keyboard
+# Created by Elena Sinelnikova
