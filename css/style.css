@@ -1,0 +1,91 @@
+@font-face {
+  font-family: "Montserrat";
+  src: url("./assets/fonts/Montserrat-Medium.ttf");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("./assets/fonts/Montserrat-MediumItalic.ttf");
+  font-weight: 400;
+  font-style: italic;
+}
+* {
+  padding: 0px;
+  margin: 0px;
+}
+
+.body {
+  box-sizing: border-box;
+  margin: 30px auto 10px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  font: normal normal 1.1rem/1.4rem "Montserrat", sans-serif;
+  color: #0d4e4e;
+  text-align: center;
+}
+
+.keyboard {
+  width: fit-content;
+  max-width: 750px;
+  padding: 10px 10px;
+  background: #0d4e4e;
+  box-shadow: 0px 2px 10px 2px #0d4e4e;
+  border-radius: 10px;
+}
+.keyboard__keys {
+  text-align: center;
+}
+.keyboard__key {
+  height: 40px;
+  width: 40px;
+  margin: 3px 0;
+  border-radius: 5px;
+  border: 2px solid #2b9696;
+  background: #2b9696;
+  color: #c4e2e2;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all ease-in 0.3s;
+  position: relative;
+}
+.keyboard__key-wide {
+  width: 80px;
+}
+.keyboard__key-superwide {
+  width: 350px;
+}
+.keyboard__key-caps::after {
+  content: '';
+  top: 3px;
+  right: 3px;
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  background: #0d4e4e;
+  border-radius: 50%;
+}
+.keyboard__key-caps-active::after {
+  content: '';
+  top: 3px;
+  right: 3px;
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  background: #2dfcfc;
+  border-radius: 50%;
+}
+.keyboard__key:hover {
+  background: #c4e2e2;
+  color: #2b9696;
+}
+.keyboard__key:active {
+  transform: scale(0.8);
+}
+
+/*# sourceMappingURL=style.css.map */
