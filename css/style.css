@@ -1,12 +1,12 @@
 @font-face {
   font-family: "Montserrat";
-  src: url("./assets/fonts/Montserrat-Medium.ttf");
+  src: url("/assets/fonts/Montserrat-Medium.ttf");
   font-weight: 400;
   font-style: normal;
 }
 @font-face {
   font-family: "Montserrat";
-  src: url("./assets/fonts/Montserrat-MediumItalic.ttf");
+  src: url("/assets/fonts/Montserrat-MediumItalic.ttf");
   font-weight: 400;
   font-style: italic;
 }
@@ -28,9 +28,13 @@
   text-align: center;
 }
 
+.textarea {
+  font: normal normal 1.1rem/1.4rem "Montserrat", sans-serif;
+}
+
 .keyboard {
   width: fit-content;
-  max-width: 750px;
+  width: 750px;
   padding: 10px 10px;
   background: #0d4e4e;
   box-shadow: 0px 2px 10px 2px #0d4e4e;
@@ -42,7 +46,7 @@
 .keyboard__key {
   height: 40px;
   width: 40px;
-  margin: 3px 0;
+  margin: 3px 3px;
   border-radius: 5px;
   border: 2px solid #2b9696;
   background: #2b9696;
@@ -58,27 +62,13 @@
   width: 80px;
 }
 .keyboard__key-superwide {
-  width: 350px;
+  width: 290px;
 }
-.keyboard__key-caps::after {
-  content: '';
-  top: 3px;
-  right: 3px;
-  position: absolute;
-  width: 7px;
-  height: 7px;
-  background: #0d4e4e;
-  border-radius: 50%;
-}
-.keyboard__key-caps-active::after {
-  content: '';
-  top: 3px;
-  right: 3px;
-  position: absolute;
-  width: 7px;
-  height: 7px;
-  background: #2dfcfc;
-  border-radius: 50%;
+.keyboard__key-caps-active {
+  transform: scale(0.95);
+  border-radius: 10px;
+  background: #c4e2e2;
+  color: #2b9696;
 }
 .keyboard__key:hover {
   background: #c4e2e2;
