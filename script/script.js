@@ -20,7 +20,7 @@ let keysContainer = document.createElement("div");
 keysContainer.classList.add("keyboard__keys");
 
 let p = document.createElement("p");
-p.innerHTML = "Клавиатура создана в операционной системе Windows<br>Для переключения языка используйте комбинацию левых клавиш ctrl и alt";
+p.innerHTML = "Клавиатура создана в операционной системе Windows";
 
 document.body.append(h1);
 document.body.append(textarea);
@@ -30,8 +30,6 @@ keysContainer.append(createKeyboard());
 document.body.append(p);
 
 let keys = keysContainer.querySelectorAll(".keyboard__key");
-//let shiftBtns = querySelectorAll(".shift-btn");
-
 
 function createKeyboard() {
     let fragment = document.createDocumentFragment();
@@ -49,6 +47,7 @@ function createKeyboard() {
         keyElement.setAttribute("type", "button");
         keyElement.setAttribute("data-about", ` ${key} `);
         keyElement.classList.add("keyboard__key");
+        //console.log(keyElement.dataset.about);
 
         switch (key) {
             case "Backspace":
@@ -297,3 +296,26 @@ function toggleShift() {
         }
     }
 }
+
+document.addEventListener('keypress', (event) => {
+    for (let key of keys) {
+        if(key.textContent === event.key){
+            //console.log('yes');
+            //console.log(key.textContent);
+            key.classList.add("keyboard__key:active");
+            //console.log(key.className);
+       };
+    }
+})
+
+document.addEventListener('keyup', (event) => {
+    for (let key of keys) {
+        if(key.textContent === event.key){
+            //console.log('yes');
+            //console.log(key.textContent);
+            key.classList.remove("keyboard__key:active");
+            //console.log(key.className);
+       };
+    }
+})
+

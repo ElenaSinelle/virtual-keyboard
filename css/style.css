@@ -75,6 +75,8 @@
   color: #2b9696;
 }
 .keyboard__key:active {
+  background: #c4e2e2;
+  color: #2b9696;
   transform: scale(0.8);
 }
 
