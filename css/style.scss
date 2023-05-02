@@ -36,7 +36,7 @@
 
 .keyboard {
   width: fit-content;
-  width: 750px;
+  width: 780px;
   padding: 10px 10px;
   background: rgb(13, 78, 78);
   box-shadow: 0px 2px 10px 2px rgb(13, 78, 78);
@@ -65,8 +65,12 @@
       width: 80px;
     }
 
+    &-shiftwide {
+      width: 100px;
+    }
+
     &-superwide {
-      width: 290px;
+      width: 250px;
     }
 
     &-caps-active {
