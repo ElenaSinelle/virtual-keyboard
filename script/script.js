@@ -14,7 +14,7 @@ textarea.value = "";
 
 let keyboard = document.createElement("div");
 keyboard.classList.add("keyboard");
-keyboard.value = "";
+keyboard.value = keyboard.value || "";
 
 let keysContainer = document.createElement("div");
 keysContainer.classList.add("keyboard__keys");
@@ -37,42 +37,27 @@ function createKeyboard() {
         "`", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=", "Backspace",
         "Tab", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "[", "]", "\\",
         "CapsLock", "a", "s", "d", "f", "g", "h", "j", "k", "l", ";", "'", "Enter",
-        "Shift", "z", "x", "c", "v", "b", "n", "m", ",", ".", "/", "Shift", String.fromCodePoint(129093),
-        "Ctrl", "Win", "Alt", "Space", "Alt", "Ctrl", String.fromCodePoint(129092), String.fromCodePoint(129095), String.fromCodePoint(129094),
+        "ShiftLeft", "z", "x", "c", "v", "b", "n", "m", ",", ".", "/", "ArrowUp", "ShiftRight",
+        "ControlLeft", "Meta", "AltLeft", "Space", "AltRight", "ControlRight", "ArrowLeft", "ArrowDown", "ArrowRight",
     ];
 
     keyLayout.forEach(key => {
         let keyElement = document.createElement("button");
-
-        keyElement.setAttribute("type", "button");
-        keyElement.setAttribute("data-about", ` ${key} `);
-        keyElement.classList.add("keyboard__key");
-        //console.log(keyElement.dataset.about);
+        textarea.focus();
 
         switch (key) {
             case "Backspace":
-                keyElement.classList.add("keyboard__key-wide");
-                keyElement.textContent = "Backspace";
-                keyElement.value = keyElement.textContent;
+                keyElement.innerHTML = '<button class="keyboard__key keyboard__key-wide" data="'+"Backspace"+'"'+'>'+'Backspace'+'</button>';
 
                 keyElement.addEventListener("click", () => {
-                    if (textarea.value.endsWith(String.fromCodePoint(129093))
-                        || textarea.value.endsWith(String.fromCodePoint(129092))
-                        || textarea.value.endsWith(String.fromCodePoint(129095))
-                        || textarea.value.endsWith(String.fromCodePoint(129094))) {
-                        keyboard.value = keyboard.value.substring(0, keyboard.value.length - 2);
-                    } else {
-                        keyboard.value = keyboard.value.substring(0, keyboard.value.length - 1);
-                    }
-
+                    keyboard.value = keyboard.value.substring(0, keyboard.value.length - 1);
                     textarea.value = keyboard.value;
                 });
 
                 break;
 
             case "Tab":
-                keyElement.classList.add("keyboard__key-wide");
-                keyElement.textContent = "Tab";
+                keyElement.innerHTML = '<button class="keyboard__key keyboard__key-wide" data="'+"Tab"+'"'+'>'+'Tab'+'</button>';
 
                 keyElement.addEventListener("click", () => {
                     keyboard.value += "    ";
@@ -82,8 +67,7 @@ function createKeyboard() {
                 break;
 
             case "\\":
-                keyElement.classList.add("keyboard__key-wide");
-                keyElement.textContent = "\\";
+                keyElement.innerHTML = '<button class="keyboard__key keyboard__key-wide" data="'+"Backslash"+'"'+'>'+'&#92;'+'</button>';
 
                 keyElement.addEventListener("click", () => {
                     keyboard.value += keyElement.textContent;
@@ -93,8 +77,7 @@ function createKeyboard() {
                 break;
 
             case "CapsLock":
-                keyElement.classList.add("keyboard__key-wide");
-                keyElement.textContent = "CapsLock";
+                keyElement.innerHTML = '<button class="keyboard__key keyboard__key-wide" data="'+"CapsLock"+'"'+'>'+'CapsLock'+'</button>';
 
                 keyElement.addEventListener("click", () => {
                     toggleCapsLock();
@@ -103,10 +86,9 @@ function createKeyboard() {
 
                 break;
 
-            case "Shift":
-                keyElement.classList.add("keyboard__key-wide");
-                keyElement.classList.add("shift-btn");
-                keyElement.textContent = "Shift";
+            case "ShiftRight":
+                keyElement.innerHTML = '<button class="keyboard__key keyboard__key-shiftwide" data="'+"ShiftRight"+'"'+'>'+'Shift'+'</button>';
+
 
                 keyElement.addEventListener("mousedown", () => {
                     toggleShift()
@@ -118,15 +100,32 @@ function createKeyboard() {
 
                 break;
 
-            case "Ctrl":
-                keyElement.classList.add("keyboard__key-wide");
-                keyElement.textContent = "Ctrl";
+            case "ShiftLeft":
+                keyElement.innerHTML = '<button class="keyboard__key keyboard__key-shiftwide" data="'+"ShiftLeft"+'"'+'>'+'Shift'+'</button>';
+
+
+                keyElement.addEventListener("mousedown", () => {
+                    toggleShift()
+                });
+
+                keyElement.addEventListener("mouseup", () => {
+                    toggleShift()
+                });
+
+                break;
+
+            case "ControlRight":
+                keyElement.innerHTML = '<button class="keyboard__key" data="'+"ControlRight"+'"'+'>'+'Ctrl'+'</button>';
+
+                break;
+
+            case "ControlLeft":
+                keyElement.innerHTML = '<button class="keyboard__key" data="'+"ControlLeft"+'"'+'>'+'Ctrl'+'</button>';
 
                 break;
 
             case "Enter":
-                keyElement.classList.add("keyboard__key-wide");
-                keyElement.textContent = "Enter";
+                keyElement.innerHTML = '<button class="keyboard__key keyboard__key-wide" data="'+"Enter"+'"'+'>'+'Enter'+'</button>';
 
                 keyElement.addEventListener("click", () => {
                     keyboard.value += "\n";
@@ -136,8 +135,7 @@ function createKeyboard() {
                 break;
 
             case "Space":
-                keyElement.classList.add("keyboard__key-superwide");
-                keyElement.textContent = "Space";
+                keyElement.innerHTML = '<button class="keyboard__key keyboard__key-superwide" data="'+"Space"+'"'+'>'+'Space'+'</button>';
 
                 keyElement.addEventListener("click", () => {
                     keyboard.value += " ";
@@ -146,25 +144,70 @@ function createKeyboard() {
 
                 break;
 
-                case "Alt":
-                    keyElement.textContent = "Alt";
+            case "AltRight":
+                keyElement.innerHTML = '<button class="keyboard__key" data="'+"AltRight"+'"'+'>'+'Alt'+'</button>';
 
-                    break;
+                break;
 
-                case "Win":
-                    keyElement.textContent = "Win";
+            case "AltLeft":
+                keyElement.innerHTML = '<button class="keyboard__key" data="'+"AltLeft"+'"'+'>'+'Alt'+'</button>';
 
-                    break;
+                break;
 
-                default:
-                    keyElement.textContent = key.toLowerCase();
+            case "Meta":
+                keyElement.innerHTML = '<button class="keyboard__key" data="'+"Meta"+'"'+'>'+'Meta'+'</button>';
 
-                    keyElement.addEventListener("click", () => {
-                        keyboard.value += `${keyElement.textContent}`;
-                        textarea.value = keyboard.value;
-                    });
+                break;
 
-                    break;
+            case "ArrowUp":
+                keyElement.innerHTML = '<button class="keyboard__key" data="'+"ArrowUp"+'"'+'>'+'&#x25B2;'+'</button>';
+
+                keyElement.addEventListener("click", () => {
+                    keyboard.value += `${keyElement.textContent}`;
+                    textarea.value = keyboard.value;
+                });
+
+                break;
+
+            case "ArrowLeft":
+                keyElement.innerHTML = '<button class="keyboard__key" data="'+"ArrowLeft"+'"'+'>'+'&#x25C4;'+'</button>';
+
+                keyElement.addEventListener("click", () => {
+                    keyboard.value += `${keyElement.textContent}`;
+                    textarea.value = keyboard.value;
+                });
+
+                break;
+
+            case "ArrowDown":
+                keyElement.innerHTML = '<button class="keyboard__key" data="'+"ArrowDown"+'"'+'>'+'&#x25BC;'+'</button>';
+
+                keyElement.addEventListener("click", () => {
+                    keyboard.value += `${keyElement.textContent}`;
+                    textarea.value = keyboard.value;
+                });
+
+                break;
+
+            case "ArrowRight":
+                keyElement.innerHTML = '<button class="keyboard__key" data="'+"ArrowRight"+'"'+'>'+'&#x25BA;'+'</button>';
+
+                keyElement.addEventListener("click", () => {
+                    keyboard.value += `${keyElement.textContent}`;
+                    textarea.value = keyboard.value;
+                });
+
+                break;
+
+            default:
+                keyElement.innerHTML = '<button class="keyboard__key" data="'+key+'"'+'>'+key.toLowerCase()+'</button>';
+
+                keyElement.addEventListener("click", () => {
+                    keyboard.value += `${keyElement.textContent}`;
+                    textarea.value = keyboard.value;
+                });
+
+                break;
         }
 
         fragment.append(keyElement);
@@ -297,25 +340,129 @@ function toggleShift() {
     }
 }
 
-document.addEventListener('keypress', (event) => {
-    for (let key of keys) {
-        if(key.textContent === event.key){
-            //console.log('yes');
-            //console.log(key.textContent);
-            key.classList.add("keyboard__key:active");
-            //console.log(key.className);
-       };
+
+window.addEventListener('keydown', (event) => {
+
+    if(event.key === "Backspace") {
+        document.querySelector('.keyboard__keys .keyboard__key[data="' + "Backspace" + '"]').classList.add('keyboard__key-active');
+    } else if (event.key === "Tab") {
+        document.querySelector('.keyboard__keys .keyboard__key[data="' + "Tab" + '"]').classList.add('keyboard__key-active');
+
+    } else if (event.key === "CapsLock") {
+        toggleCapsLock();
+        document.querySelector('.keyboard__keys .keyboard__key[data="' + "CapsLock" + '"]').classList.toggle("keyboard__key-caps-active");
+
+    } else if ((event.key === "Shift") && (event.code === "ShiftLeft")){
+        document.querySelector('.keyboard__keys .keyboard__key[data="' + "ShiftLeft" + '"]').classList.add('keyboard__key-active');
+
+    } else if((event.key === "Shift") && (event.code === "ShiftRight")) {
+        document.querySelector('.keyboard__keys .keyboard__key[data="' + "ShiftRight" + '"]').classList.add('keyboard__key-active');
+
+    } else if ((event.key === "\\") || (event.code === "Backslash")) {
+        document.querySelector('.keyboard__keys .keyboard__key[data="' + "Backslash" + '"]').classList.add('keyboard__key-active');
+
+    } else if (event.key === "Enter") {
+        document.querySelector('.keyboard__keys .keyboard__key[data="' + "Enter" + '"]').classList.add('keyboard__key-active');
+
+    } else if ((event.key === "Control") && (event.code === "ControlLeft")) {
+        document.querySelector('.keyboard__keys .keyboard__key[data="' + "ControlLeft" + '"]').classList.add('keyboard__key-active');
+
+    } else if ((event.key === "Control") && (event.code === "ControlRight")) {
+        document.querySelector('.keyboard__keys .keyboard__key[data="' + "ControlRight" + '"]').classList.add('keyboard__key-active');
+
+    } else if (event.key === "Meta") {
+        document.querySelector('.keyboard__keys .keyboard__key[data="' + "Meta" + '"]').classList.add('keyboard__key-active');
+
+    } else if ((event.key === "Alt") && (event.code === "AltLeft")) {
+        document.querySelector('.keyboard__keys .keyboard__key[data="' + "AltLeft" + '"]').classList.add('keyboard__key-active');
+
+    } else if ((event.key === "Alt") && (event.code === "AltRight")) {
+        document.querySelector('.keyboard__keys .keyboard__key[data="' + "AltRight" + '"]').classList.add('keyboard__key-active');
+
+    } else if (event.key === "ArrowLeft") {
+        document.querySelector('.keyboard__keys .keyboard__key[data="' + "ArrowLeft" + '"]').classList.add('keyboard__key-active');
+
+    } else if (event.key === "ArrowRight") {
+        document.querySelector('.keyboard__keys .keyboard__key[data="' + "ArrowRight" + '"]').classList.add('keyboard__key-active');
+
+    } else if (event.key === "ArrowUp") {
+        document.querySelector('.keyboard__keys .keyboard__key[data="' + "ArrowUp" + '"]').classList.add('keyboard__key-active');
+
+    } else if (event.key === "ArrowDown") {
+        document.querySelector('.keyboard__keys .keyboard__key[data="' + "ArrowDown" + '"]').classList.add('keyboard__key-active');
+
+    } else if (event.key === " ") {
+        document.querySelector('.keyboard__keys .keyboard__key[data="' + "Space" + '"]').classList.add('keyboard__key-active');
+
+    } else {
+        for (let key of keys) {
+            if(key.getAttribute('data') == event.key.toLowerCase()){
+                key.classList.add("keyboard__key-active");
+           }
+        }
     }
+
+
 })
 
-document.addEventListener('keyup', (event) => {
-    for (let key of keys) {
-        if(key.textContent === event.key){
-            //console.log('yes');
-            //console.log(key.textContent);
-            key.classList.remove("keyboard__key:active");
-            //console.log(key.className);
-       };
+window.addEventListener('keyup', (event) => {
+
+    if(event.key === "Backspace") {
+        document.querySelector('.keyboard__keys .keyboard__key[data="' + "Backspace" + '"]').classList.remove('keyboard__key-active');
+
+    } else if (event.key === "Tab") {
+        document.querySelector('.keyboard__keys .keyboard__key[data="' + "Tab" + '"]').classList.remove('keyboard__key-active');
+
+    } else if ((event.key === "Shift") && (event.code === "ShiftLeft")){
+        document.querySelector('.keyboard__keys .keyboard__key[data="' + "ShiftLeft" + '"]').classList.remove('keyboard__key-active');
+
+    } else if((event.key === "Shift") && (event.code === "ShiftRight")) {
+        document.querySelector('.keyboard__keys .keyboard__key[data="' + "ShiftRight" + '"]').classList.remove('keyboard__key-active');
+
+    } else if ((event.key === "\\") || (event.code === "Backslash")) {
+        document.querySelector('.keyboard__keys .keyboard__key[data="' + "Backslash" + '"]').classList.remove('keyboard__key-active');
+
+    } else if (event.key === "Enter") {
+        document.querySelector('.keyboard__keys .keyboard__key[data="' + "Enter" + '"]').classList.remove('keyboard__key-active');
+
+    } else if ((event.key === "Control") && (event.code === "ControlLeft")) {
+        document.querySelector('.keyboard__keys .keyboard__key[data="' + "ControlLeft" + '"]').classList.remove('keyboard__key-active');
+
+    } else if ((event.key === "Control") && (event.code === "ControlRight")) {
+        document.querySelector('.keyboard__keys .keyboard__key[data="' + "ControlRight" + '"]').classList.remove('keyboard__key-active');
+
+    } else if (event.key === "Meta") {
+        document.querySelector('.keyboard__keys .keyboard__key[data="' + "Meta" + '"]').classList.remove('keyboard__key-active');
+
+    } else if ((event.key === "Alt") && (event.code === "AltLeft")) {
+        document.querySelector('.keyboard__keys .keyboard__key[data="' + "AltLeft" + '"]').classList.remove('keyboard__key-active');
+
+    } else if ((event.key === "Alt") && (event.code === "AltRight")) {
+        document.querySelector('.keyboard__keys .keyboard__key[data="' + "AltRight" + '"]').classList.remove('keyboard__key-active');
+
+    } else if (event.key === "ArrowLeft") {
+        document.querySelector('.keyboard__keys .keyboard__key[data="' + "ArrowLeft" + '"]').classList.remove('keyboard__key-active');
+
+    } else if (event.key === "ArrowRight") {
+        document.querySelector('.keyboard__keys .keyboard__key[data="' + "ArrowRight" + '"]').classList.remove('keyboard__key-active');
+
+    } else if (event.key === "ArrowUp") {
+        document.querySelector('.keyboard__keys .keyboard__key[data="' + "ArrowUp" + '"]').classList.remove('keyboard__key-active');
+
+    } else if (event.key === "ArrowDown") {
+        document.querySelector('.keyboard__keys .keyboard__key[data="' + "ArrowDown" + '"]').classList.remove('keyboard__key-active');
+
+    } else if (event.key === " ") {
+        document.querySelector('.keyboard__keys .keyboard__key[data="' + "Space" + '"]').classList.remove('keyboard__key-active');
+
+    } else {
+        for (let key of keys) {
+            if(key.getAttribute('data') == event.key.toLowerCase()){
+                key.classList.remove("keyboard__key-active");
+           }
+        }
     }
+
+
 })
 
