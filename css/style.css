@@ -67,17 +67,17 @@
 .keyboard__key-superwide {
   width: 250px;
 }
-.keyboard__key-caps-active {
-  transform: scale(0.95);
-  border-radius: 10px;
-  background: #c4e2e2;
-  color: #2b9696;
-}
 .keyboard__key:hover {
   background: #c4e2e2;
   color: #2b9696;
 }
-.keyboard__key:active {
+.keyboard__key-caps-active {
+  transform: scale(0.8);
+  border-radius: 10px;
+  background: #c4e2e2;
+  color: #2b9696;
+}
+.keyboard__key-active {
   background: #c4e2e2;
   color: #2b9696;
   transform: scale(0.8);

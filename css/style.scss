@@ -73,19 +73,19 @@
       width: 250px;
     }
 
-    &-caps-active {
-      transform: scale(0.95);
-      border-radius: 10px;
-      background: rgb(196, 226, 226);
-      color: rgb(43, 150, 150);
-    }
-
     &:hover {
       background: rgb(196, 226, 226);
       color: rgb(43, 150, 150);
     }
 
-    &:active {
+    &-caps-active {
+      transform: scale(0.8);
+      border-radius: 10px;
+      background: rgb(196, 226, 226);
+      color: rgb(43, 150, 150);
+    }
+
+    &-active {
       background: rgb(196, 226, 226);
       color: rgb(43, 150, 150);
       transform: scale(0.8);
